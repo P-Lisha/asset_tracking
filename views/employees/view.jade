@@ -1,0 +1,24 @@
+extends ../layout
+block content
+  .card: .card-body
+    table.table
+      tr
+        th Name
+        td= employee.name
+      tr
+        th Email
+        td= employee.email
+      tr
+        th Phone
+        td= employee.phone
+      tr
+        th Designation
+        td= employee.designation
+      tr
+        th Branch
+        td= employee.Branch ? employee.Branch.name : '-'
+      tr
+        th Status
+        td= employee.isActive ? 'Active' : 'Inactive'
+  a.btn.btn-warning(href='/employees/' + employee.id + '/edit') Edit
+  a.btn.btn-secondary(href='/employees') Back

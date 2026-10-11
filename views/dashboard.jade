@@ -1,0 +1,22 @@
+extends layout
+block content
+  .row.g-3
+    .col-md-3: .card.text-bg-success: .card-body
+      h6 In Stock
+      h2= inStock
+    .col-md-3: .card.text-bg-primary: .card-body
+      h6 Issued
+      h2= issued
+    .col-md-3: .card.text-bg-secondary: .card-body
+      h6 Scrapped
+      h2= scrapped
+    .col-md-3: .card.text-bg-dark: .card-body
+      h6 Employees
+      h2= employees
+  .row.g-3.mt-1
+    .col-md-6: .card: .card-body
+      h6 Categories
+      h4= categories
+    .col-md-6: .card: .card-body
+      h6 Branches
+      h4= branches

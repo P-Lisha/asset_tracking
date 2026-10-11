@@ -1,0 +1,31 @@
+extends ../layout
+block content
+  .card: .card-body
+    table.table
+      tr
+        th Asset Code
+        td= asset.assetCode
+      tr
+        th Serial No
+        td= asset.serialNo
+      tr
+        th Category
+        td= asset.Category ? asset.Category.name : '-'
+      tr
+        th Make / Model
+        td= (asset.make || '') + ' ' + (asset.model || '')
+      tr
+        th Branch
+        td= asset.Branch ? asset.Branch.name : '-'
+      tr
+        th Purchase Value
+        td= asset.purchaseValue
+      tr
+        th Purchase Date
+        td= asset.purchaseDate
+      tr
+        th Status
+        td= asset.status
+  a.btn.btn-warning(href='/assets/' + asset.id + '/edit') Edit
+  a.btn.btn-dark(href='/history?assetId=' + asset.id) View History
+  a.btn.btn-secondary(href='/assets') Back

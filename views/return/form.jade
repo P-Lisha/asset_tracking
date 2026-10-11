@@ -1,0 +1,25 @@
+extends ../layout
+block content
+  if assets.length === 0
+    .alert.alert-info No assets are currently issued.
+  else
+    form(method='POST', action='/return')
+      .mb-3
+        label.form-label Asset (currently issued)
+        select.form-select(name='assetId', required)
+          option(value='') -- Select Asset --
+          each a in assets
+            - var holder = (a.Transactions && a.Transactions[0] && a.Transactions[0].Employee) ? a.Transactions[0].Employee.name : 'Unknown'
+            option(value=a.id)= a.assetCode + ' - ' + (a.make || '') + ' ' + (a.model || '') + ' (held by ' + holder + ')'
+      .mb-3
+        label.form-label Reason
+        select.form-select(name='reason', required)
+          option(value='Upgrade') Upgrade
+          option(value='Repair') Repair
+          option(value='Resignation') Resignation
+          option(value='Transfer') Transfer
+          option(value='Other') Other
+      .mb-3
+        label.form-label Notes
+        input.form-control(name='notes')
+      button.btn.btn-primary(type='submit') Return Asset

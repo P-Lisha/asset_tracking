@@ -1,0 +1,17 @@
+extends ../layout
+block content
+  a.btn.btn-primary.mb-3(href='/categories/new') + Add Category
+  table.table.table-striped.table-bordered.datatable
+    thead: tr
+      th Name
+      th Description
+      th Actions
+    tbody
+      each c in categories
+        tr
+          td= c.name
+          td= c.description
+          td
+            a.btn.btn-sm.btn-warning(href='/categories/' + c.id + '/edit') Edit
+            form.d-inline(method='POST', action='/categories/' + c.id + '?_method=DELETE', onsubmit='return confirm("Delete this category?")')
+              button.btn.btn-sm.btn-danger(type='submit') Delete

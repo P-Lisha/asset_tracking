@@ -1,0 +1,27 @@
+extends ../layout
+block content
+  form(method='POST', action=action)
+    .row
+      .col-md-6.mb-3
+        label.form-label Name
+        input.form-control(name='name', value=employee.name, required)
+      .col-md-6.mb-3
+        label.form-label Email
+        input.form-control(type='email', name='email', value=employee.email)
+      .col-md-6.mb-3
+        label.form-label Phone
+        input.form-control(name='phone', value=employee.phone)
+      .col-md-6.mb-3
+        label.form-label Designation
+        input.form-control(name='designation', value=employee.designation)
+      .col-md-6.mb-3
+        label.form-label Branch
+        select.form-select(name='branchId')
+          option(value='') -- Select --
+          each b in branches
+            option(value=b.id, selected=(employee.branchId === b.id))= b.name
+      .col-md-6.mb-3.form-check.mt-4
+        input.form-check-input#isActive(type='checkbox', name='isActive', checked=(employee.isActive === undefined ? true : employee.isActive))
+        label.form-check-label(for='isActive') Active
+    button.btn.btn-primary(type='submit') Save
+    a.btn.btn-secondary(href='/employees') Cancel

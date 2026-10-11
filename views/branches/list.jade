@@ -1,0 +1,17 @@
+extends ../layout
+block content
+  a.btn.btn-primary.mb-3(href='/branches/new') + Add Branch
+  table.table.table-striped.table-bordered.datatable
+    thead: tr
+      th Name
+      th Location
+      th Actions
+    tbody
+      each b in branches
+        tr
+          td= b.name
+          td= b.location
+          td
+            a.btn.btn-sm.btn-warning(href='/branches/' + b.id + '/edit') Edit
+            form.d-inline(method='POST', action='/branches/' + b.id + '?_method=DELETE', onsubmit='return confirm("Delete this branch?")')
+              button.btn.btn-sm.btn-danger(type='submit') Delete

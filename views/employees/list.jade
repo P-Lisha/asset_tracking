@@ -1,0 +1,39 @@
+extends ../layout
+block content
+  form.row.g-2.mb-3(method='GET', action='/employees')
+    .col-auto
+      select.form-select(name='status')
+        option(value='', selected=(status === '')) All
+        option(value='active', selected=(status === 'active')) Active
+        option(value='inactive', selected=(status === 'inactive')) Inactive
+    .col-auto
+      input.form-control(name='q', value=q, placeholder='Search name / email / role')
+    .col-auto
+      button.btn.btn-outline-primary(type='submit') Filter
+    .col-auto
+      a.btn.btn-primary(href='/employees/new') + Add Employee
+  table.table.table-striped.table-bordered.datatable
+    thead: tr
+      th Name
+      th Email
+      th Phone
+      th Designation
+      th Branch
+      th Status
+      th Actions
+    tbody
+      each e in employees
+        tr
+          td= e.name
+          td= e.email
+          td= e.phone
+          td= e.designation
+          td= e.Branch ? e.Branch.name : '-'
+          td
+            if e.isActive
+              span.badge.bg-success Active
+            else
+              span.badge.bg-secondary Inactive
+          td
+            a.btn.btn-sm.btn-info(href='/employees/' + e.id) View
+            a.btn.btn-sm.btn-warning(href='/employees/' + e.id + '/edit') Edit

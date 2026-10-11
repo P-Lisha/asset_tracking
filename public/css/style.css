@@ -1,0 +1,5 @@
+body { background: #f5f6f8; }
+.card h2 { margin: 0; }
+.navbar-brand { font-weight: 600; }
+table.datatable { width: 100% !important; }
+.btn-sm { margin-right: 2px; }

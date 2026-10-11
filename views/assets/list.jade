@@ -1,0 +1,49 @@
+extends ../layout
+block content
+  form.row.g-2.mb-3(method='GET', action='/assets')
+    .col-auto
+      select.form-select(name='categoryId')
+        option(value='') All Categories
+        each c in categories
+          option(value=c.id, selected=(String(categoryId) === String(c.id)))= c.name
+    .col-auto
+      input.form-control(name='q', value=q, placeholder='Search make / model / serial')
+    .col-auto.form-check.mt-2
+      input.form-check-input#showScrapped(type='checkbox', name='showScrapped', checked=showScrapped)
+      label.form-check-label(for='showScrapped') Include scrapped
+    .col-auto
+      button.btn.btn-outline-primary(type='submit') Filter
+    .col-auto
+      a.btn.btn-primary(href='/assets/new') + Add Asset
+  table.table.table-striped.table-bordered.datatable
+    thead: tr
+      th Asset Code
+      th Serial No
+      th Category
+      th Make
+      th Model
+      th Branch
+      th Value
+      th Status
+      th Actions
+    tbody
+      each a in assets
+        tr
+          td= a.assetCode
+          td= a.serialNo
+          td= a.Category ? a.Category.name : '-'
+          td= a.make
+          td= a.model
+          td= a.Branch ? a.Branch.name : '-'
+          td= a.purchaseValue
+          td
+            if a.status === 'IN_STOCK'
+              span.badge.bg-success In Stock
+            else if a.status === 'ISSUED'
+              span.badge.bg-primary Issued
+            else
+              span.badge.bg-secondary Scrapped
+          td
+            a.btn.btn-sm.btn-info(href='/assets/' + a.id) View
+            a.btn.btn-sm.btn-warning(href='/assets/' + a.id + '/edit') Edit
+            a.btn.btn-sm.btn-dark(href='/history?assetId=' + a.id) History

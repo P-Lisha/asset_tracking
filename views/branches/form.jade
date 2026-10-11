@@ -1,0 +1,11 @@
+extends ../layout
+block content
+  form(method='POST', action=action)
+    .mb-3
+      label.form-label Name
+      input.form-control(name='name', value=branch.name, required)
+    .mb-3
+      label.form-label Location
+      input.form-control(name='location', value=branch.location)
+    button.btn.btn-primary(type='submit') Save
+    a.btn.btn-secondary(href='/branches') Cancel

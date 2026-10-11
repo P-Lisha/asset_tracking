@@ -1,0 +1,36 @@
+extends ../layout
+block content
+  form(method='POST', action=action)
+    .row
+      .col-md-4.mb-3
+        label.form-label Asset Code (unique id)
+        input.form-control(name='assetCode', value=asset.assetCode, required)
+      .col-md-4.mb-3
+        label.form-label Serial No
+        input.form-control(name='serialNo', value=asset.serialNo, required)
+      .col-md-4.mb-3
+        label.form-label Category
+        select.form-select(name='categoryId', required)
+          option(value='') -- Select --
+          each c in categories
+            option(value=c.id, selected=(asset.categoryId === c.id))= c.name
+      .col-md-4.mb-3
+        label.form-label Make
+        input.form-control(name='make', value=asset.make)
+      .col-md-4.mb-3
+        label.form-label Model
+        input.form-control(name='model', value=asset.model)
+      .col-md-4.mb-3
+        label.form-label Branch
+        select.form-select(name='branchId')
+          option(value='') -- Select --
+          each b in branches
+            option(value=b.id, selected=(asset.branchId === b.id))= b.name
+      .col-md-4.mb-3
+        label.form-label Purchase Value
+        input.form-control(type='number', step='0.01', name='purchaseValue', value=asset.purchaseValue)
+      .col-md-4.mb-3
+        label.form-label Purchase Date
+        input.form-control(type='date', name='purchaseDate', value=asset.purchaseDate)
+    button.btn.btn-primary(type='submit') Save
+    a.btn.btn-secondary(href='/assets') Cancel

@@ -1,0 +1,22 @@
+extends ../layout
+block content
+  if assets.length === 0
+    .alert.alert-info No assets available in stock to issue.
+  else
+    form(method='POST', action='/issue')
+      .mb-3
+        label.form-label Asset (in stock)
+        select.form-select(name='assetId', required)
+          option(value='') -- Select Asset --
+          each a in assets
+            option(value=a.id)= a.assetCode + ' - ' + (a.make || '') + ' ' + (a.model || '') + ' [' + a.serialNo + ']'
+      .mb-3
+        label.form-label Issue To (active employee)
+        select.form-select(name='employeeId', required)
+          option(value='') -- Select Employee --
+          each e in employees
+            option(value=e.id)= e.name + (e.designation ? ' (' + e.designation + ')' : '')
+      .mb-3
+        label.form-label Notes
+        input.form-control(name='notes')
+      button.btn.btn-primary(type='submit') Issue Asset

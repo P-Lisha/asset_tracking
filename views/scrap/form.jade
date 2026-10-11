@@ -1,0 +1,24 @@
+extends ../layout
+block content
+  if assets.length === 0
+    .alert.alert-info No assets available to scrap.
+  else
+    .alert.alert-warning Scrapped assets are hidden from all screens except reports/history.
+    form(method='POST', action='/scrap')
+      .mb-3
+        label.form-label Asset
+        select.form-select(name='assetId', required)
+          option(value='') -- Select Asset --
+          each a in assets
+            option(value=a.id)= a.assetCode + ' - ' + (a.make || '') + ' ' + (a.model || '') + ' [' + a.status + ']'
+      .mb-3
+        label.form-label Reason
+        select.form-select(name='reason', required)
+          option(value='Obsolete') Obsolete
+          option(value='Damaged beyond repair') Damaged beyond repair
+          option(value='Lost') Lost
+          option(value='Other') Other
+      .mb-3
+        label.form-label Notes
+        input.form-control(name='notes')
+      button.btn.btn-danger(type='submit', onclick='return confirm("Scrap this asset? It will be removed from all screens.")') Scrap Asset

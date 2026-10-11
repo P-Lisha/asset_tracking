@@ -1,0 +1,31 @@
+extends ../layout
+block content
+  .row.mb-3
+    each stats, name in byBranch
+      .col-md-3
+        .card.text-bg-light: .card-body
+          h6= name
+          div #{stats.count} assets
+          div.fw-bold ₹#{stats.value.toFixed(2)}
+  table.table.table-striped.table-bordered.datatable
+    thead: tr
+      th Asset Code
+      th Serial No
+      th Category
+      th Make
+      th Model
+      th Branch
+      th Value
+    tbody
+      each a in assets
+        tr
+          td= a.assetCode
+          td= a.serialNo
+          td= a.Category ? a.Category.name : '-'
+          td= a.make
+          td= a.model
+          td= a.Branch ? a.Branch.name : '-'
+          td= a.purchaseValue
+    tfoot: tr.fw-bold.table-dark
+      td(colspan='6') Total in stock: #{grandCount} assets
+      td ₹#{grandValue.toFixed(2)}
