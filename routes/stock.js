@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { Asset, Category, Branch } = require('../models');
 
-// Bird's eye view of IN_STOCK assets, grouped by branch with value totals in footer.
 router.get('/', async (req, res, next) => {
   try {
     const assets = await Asset.findAll({
@@ -11,7 +10,6 @@ router.get('/', async (req, res, next) => {
       order: [['branchId', 'ASC'], ['assetCode', 'ASC']],
     });
 
-    // Totals by branch
     const byBranch = {};
     let grandCount = 0;
     let grandValue = 0;

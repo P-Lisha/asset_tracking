@@ -1,9 +1,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-// status: IN_STOCK -> ISSUED -> (back to IN_STOCK) ... -> SCRAPPED (terminal)
 const Asset = sequelize.define('Asset', {
-  assetCode: { type: DataTypes.STRING, allowNull: false, unique: true }, // unique id
+  assetCode: { type: DataTypes.STRING, allowNull: false, unique: true },
   serialNo: { type: DataTypes.STRING, allowNull: false, unique: true },
   make: { type: DataTypes.STRING },
   model: { type: DataTypes.STRING },

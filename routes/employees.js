@@ -3,7 +3,6 @@ const router = express.Router();
 const { Op } = require('sequelize');
 const { Employee, Branch } = require('../models');
 
-// List with filters: active/inactive + search
 router.get('/', async (req, res, next) => {
   try {
     const { status, q } = req.query;

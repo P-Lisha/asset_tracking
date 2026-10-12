@@ -3,13 +3,11 @@ const router = express.Router();
 const { Op } = require('sequelize');
 const { Asset, Category, Branch, Transaction } = require('../models');
 
-// Only these fields may come from forms; status is managed by issue/return/scrap flows.
 function pickAssetFields(body) {
   const { assetCode, serialNo, make, model, purchaseValue, purchaseDate, categoryId, branchId } = body;
   return { assetCode, serialNo, make, model, purchaseValue, purchaseDate, categoryId, branchId };
 }
 
-// List with filters: category, search by make/model/serial. Scrapped hidden by default.
 router.get('/', async (req, res, next) => {
   try {
     const { categoryId, q, showScrapped } = req.query;

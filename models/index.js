@@ -5,7 +5,6 @@ const Employee = require('./employee');
 const Asset = require('./asset');
 const Transaction = require('./transaction');
 
-// ---- Associations ----
 Branch.hasMany(Employee, { foreignKey: 'branchId' });
 Employee.belongsTo(Branch, { foreignKey: 'branchId' });
 

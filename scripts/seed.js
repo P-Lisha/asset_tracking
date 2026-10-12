@@ -1,10 +1,9 @@
-// Seeds sample data. Run after db:sync -> npm run db:seed
 require('dotenv').config();
 const { sequelize, Branch, Category, Employee, Asset, Transaction } = require('../models');
 
 (async () => {
   try {
-    await sequelize.sync({ force: true }); // WARNING: drops & recreates all tables
+    await sequelize.sync({ force: true });
     console.log('Tables recreated.');
 
     const branches = await Branch.bulkCreate([
@@ -33,7 +32,6 @@ const { sequelize, Branch, Category, Employee, Asset, Transaction } = require('.
       { assetCode: 'AST-0004', serialNo: 'SN-DRL-001', make: 'Bosch', model: 'GSB 600', purchaseValue: 5500, purchaseDate: '2024-01-20', status: 'IN_STOCK', categoryId: categories[2].id, branchId: branches[2].id },
     ]);
 
-    // purchase events for history
     for (const a of assets) {
       await Transaction.create({ type: 'PURCHASE', notes: 'Initial purchase', assetId: a.id, txnDate: a.purchaseDate });
     }

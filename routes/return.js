@@ -3,7 +3,6 @@ const router = express.Router();
 const { Op } = require('sequelize');
 const { sequelize, Asset, Employee, Transaction, Category } = require('../models');
 
-// Show currently issued assets with who holds them (latest ISSUE txn)
 router.get('/', async (req, res, next) => {
   try {
     const assets = await Asset.findAll({
@@ -27,7 +26,6 @@ router.post('/', async (req, res, next) => {
       await t.rollback();
       return res.status(400).render('error', { message: 'Asset is not currently issued.' });
     }
-    // find the employee currently holding it
     const lastIssue = await Transaction.findOne({
       where: { assetId, type: 'ISSUE' }, order: [['txnDate', 'DESC']], transaction: t,
     });

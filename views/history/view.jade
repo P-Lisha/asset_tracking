@@ -11,7 +11,7 @@ block content
       h5 #{asset.assetCode} — #{asset.make} #{asset.model}
       div Serial: #{asset.serialNo} | Category: #{asset.Category ? asset.Category.name : '-'} | Branch: #{asset.Branch ? asset.Branch.name : '-'}
       div Current status: <strong>#{asset.status}</strong> | Purchase value: ₹#{asset.purchaseValue}
-    table.table.table-striped.table-bordered
+    table.table.table-striped.table-bordered.datatable
       thead: tr
         th Date
         th Event

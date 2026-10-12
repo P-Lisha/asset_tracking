@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { Asset, Category, Branch, Transaction, Employee } = require('../models');
 
-// Pick an asset (includes scrapped, since history is a report)
 router.get('/', async (req, res, next) => {
   try {
     const { assetId } = req.query;

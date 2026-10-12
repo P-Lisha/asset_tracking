@@ -1,4 +1,3 @@
-// Creates/updates all tables based on the models. Run: npm run db:sync
 require('dotenv').config();
 const { sequelize } = require('../models');
 

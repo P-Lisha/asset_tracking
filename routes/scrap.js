@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { sequelize, Asset, Transaction, Category } = require('../models');
 
-// Only in-stock assets can be scrapped; issued ones must be returned first.
 router.get('/', async (req, res, next) => {
   try {
     const assets = await Asset.findAll({

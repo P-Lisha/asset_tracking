@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { sequelize, Asset, Employee, Transaction, Category } = require('../models');
 
-// Show form: pick an in-stock asset + an active employee
 router.get('/', async (req, res, next) => {
   try {
     const [assets, employees] = await Promise.all([
